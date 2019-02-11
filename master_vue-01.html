@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Vue Js Tutorial-07</title>
+		<style>
+			ul{
+				list-style: none;
+				text-transform: capitalize;
+				font-size: 18px;
+				font-family: cursive;
+			}
+			img{
+				width: 100px;
+				height: 100px;
+			}
+		</style>
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	</head>
+	<body>
+		<div class="container">
+			<div id="root">
+				<ul>
+					<li v-for="(skill, i) in skills">
+						{{ i+1 }} {{ skill }} <button @click="removeSkill(i)">x</button>
+					</li>
+				</ul>
+				<div class="form-group">
+					<input class="form-control" type="text" v-model="newSkill">
+				</div>
+				<button v-on:click="addNewSkill()" class="btn btn-info">Add Skill</button>
+				<br>
+				<br>
+				<p v-if="stock > 10">In Stock</p>
+				<p v-else-if="stock <= 10 && stock > 0">Almos sold out!</p>
+				<p v-else>Out of Stock</p>
+				<br>
+				<img v-bind:src="image" alt="">
+				<ul>
+					<li v-for="product in products" v-bind:key="product.id">
+						<p @mouseover="updateProduct(product.variantimage)">{{ product.id }}. {{ product.color }}</p>
+					</li>
+				</ul>
+				<br>
+				<p class="text-success">Cart ({{ cart }})</p>
+				<button class="btn btn-info" v-on:click="addToCart()">Add To Cart</button>
+			</div>
+			
+		</div>
+		<script src="https://unpkg.com/vue@2.5.22/dist/vue.js"></script>
+		<script>
+			var app = new Vue({
+				el: '#root',
+				data: {
+					newSkill: '',
+					skills: ['html', 'css', 'js', 'laravel', 'vue'],
+					stock: 0,
+					cart: 0,
+					image: 'assets/images/1.jpg',
+					products: [
+						{
+							id: '001',
+							color: 'green',
+							variantimage: 'assets/images/3.jpg',
+						},
+						{
+							id: '002',
+							color: 'red',
+							variantimage: 'assets/images/4.jpg',
+						}
+					]
+				},
+				methods: {
+					addNewSkill: function(){
+						this.skills.push(this.newSkill);
+						this.newSkill = '';
+					},
+					removeSkill: function(i){
+						this.skills.splice(i, 1);
+					},
+					addToCart: function(){
+						return this.cart += 1;
+					},
+					updateProduct: function(variantimage){
+						this.image = variantimage;
+					},
+				},
+				mounted: function(){
+					console.log('ok');
+				}
+			});
+		</script>
+	</body>
+</html>
