@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue Js Tutorial-05</title>
+	<style>
+		ul{
+			list-style: none;
+			text-transform: capitalize;
+			font-size: 18px;
+			font-family: cursive;
+		}
+	</style>
+</head>
+<body>
+
+
+<!-- 
+
+	Notation: V-if remove the tag depending on condition and v-show don't remove the tag, it just style display:none for the not matching tag.
+
+ -->
+
+
+	<div id="root">
+		<ul>
+			<li v-for="(skill, i) in skills" v-if="skill.experience > 3">
+				{{ i+1 }}. {{ skill.name }}({{ skill.experience }})
+			</li>
+		</ul>
+		<p v-if="details">
+			showing..
+		</p>
+		<p v-else>
+			not showing..
+		</p>
+	</div>
+	
+
+
+
+	<script src="https://unpkg.com/vue@2.5.22/dist/vue.js"></script>
+	<script>
+		var skills = [
+			{ name:'html', experience: 3, },
+			{ name:'css', experience: 6, },
+			{ name:'js', experience: 4, },
+			{ name:'bootstrap', experience: 5, },
+			{ name:'laravel', experience: 2, },
+			{ name:'vue js', experience: 8, },
+		];
+		var app = new Vue({
+			el: '#root',
+			data: {
+				skills,
+				details: true,
+			},
+		});
+	</script>
+</body>
+</html>
