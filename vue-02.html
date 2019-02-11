@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue Js Tutorail-02</title>
+</head>
+<body>
+	
+	<div id="root">
+		<label for="name">Enter your name</label>
+		<input type="text" id="name" v-model="name">
+		<br>
+		<h4>Your name is {{ name }}</h4>
+		<label for="description">Your Description: </label><br>
+		<textarea name="description" id="description" cols="30" rows="10" v-model="description"></textarea>
+		<p>{{ description }}</p>
+	</div>
+
+
+
+	<script src="https://unpkg.com/vue@2.5.22/dist/vue.js"></script>
+	<script>
+		var app = new Vue({
+			el: '#root',
+			data: {
+				name: 'Plabon',
+				description: 'Write your description here!',
+			},
+			mounted: function(){
+				console.log('ok');
+			}
+		});
+	</script>
+</body>
+</html>

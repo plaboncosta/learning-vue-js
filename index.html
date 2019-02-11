@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+	<div class="root">
+		<input type="text" v-model="title">
+		<h3>Your Name is: {{ name }}</h3>
+		<h3>Your Title is: {{ title }}</h3>
+	</div>
+	
+
+	<script src="https://unpkg.com/vue@2.5.22/dist/vue.js"></script>
+	<script>
+		let data = {
+			name: 'Plabon',
+			title: 'Costa'
+		}
+
+		// document.querySelector('#input').value = data.title;
+		new Vue({
+			el: '.root',
+			data: data,
+		})
+	</script>
+</body>
+</html>

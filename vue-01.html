@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+
+	<div id="root">
+		<h2>{{ message }}</h2>
+	</div>
+
+	<script src="https://unpkg.com/vue@2.5.22/dist/vue.js"></script>
+	<script>
+		var app = new Vue({
+			el: '#root',
+			data: {
+				message: 'My name is Plabon',
+			}
+		});
+	</script>
+</body>
+</html>
