@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue Js Tutorial-03</title>
+	<style>
+		.active{
+			background-color: #43abff;
+			color: #fff;
+			padding: 5px;
+			text-decoration: none;
+		}
+	</style>
+</head>
+<body>
+	
+
+	<div id="root">
+		<label for="name">Your name</label>
+		<input type="text" id="name" name="name" v-model="myProfile.name">
+		<h2>My name is : {{ myProfile.name }}</h2>
+		<a :href="myProfile.url" target="_blank" :class="{ 'active' : activeClass == 'myProfile' }">{{ myProfile.urlname }}</a>
+		<a v-bind:href="freindProfile.url" target="_blank" :class="{ 'active' : activeClass == 'freindProfile' }">{{ freindProfile.urlname }}</a>
+		<!-- <p v-text="youtube">
+			
+		</p> -->
+		<p v-html="youtube">
+			
+		</p>
+	</div>
+
+
+
+	<script src="https://unpkg.com/vue@2.5.22/dist/vue.js"></script>
+	<script>
+		let myProfile = {
+			name: 'Plabon',
+			age: 21,
+			profession: 'Laravel and Vue js Developer',
+			url: 'https://google.com',
+			urlname: 'google',
+		};
+
+		let freindProfile = {
+			name: 'Niran',
+			profession: 'Employee',
+			url: 'https://www.github.com/plaboncosta',
+			urlname: 'github',
+		};
+
+		var app = new Vue({
+			el: '#root',
+			data: {
+				myProfile,
+				freindProfile,
+				activeClass: 'myProfile',
+				youtube: '<a href="https://www.youtube.com" target="_blank">youtube</a>',
+			},
+			
+		});
+	</script>
+</body>
+</html>
