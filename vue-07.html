@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue Js Tutorial-07</title>
+	<style>
+		ul{
+			list-style: none;
+			text-transform: capitalize;
+			font-size: 18px;
+			font-family: cursive;
+		}
+	</style>
+</head>
+<body>
+
+
+
+	<div id="root">
+		<ul>
+			<li v-for="(skill, i) in skills">
+				{{ i+1 }} {{ skill }} <button @click="removeSkill(i)">x</button>
+			</li>
+		</ul>
+
+		<input type="text" v-model="newSkill">
+		<button v-on:click="addNewSkill()">Add</button>
+	</div>
+	
+
+
+
+
+	<script src="https://unpkg.com/vue@2.5.22/dist/vue.js"></script>
+	<script>
+		new Vue({
+			el: '#root',
+			data: {
+				newSkill: '',
+				skills: ['html', 'css', 'js', 'laravel', 'vue'],
+			},
+			methods: {
+				addNewSkill: function(){
+					this.skills.push(this.newSkill);
+					this.newSkill = '';
+				},
+				removeSkill: function(i){
+					this.skills.splice(i, 1);
+				},
+			},
+			mounted: function(){
+				console.log('ok');
+			}
+		});
+	</script>
+</body>
+</html>
