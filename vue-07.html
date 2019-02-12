@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue js Tutorial-07</title>
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<style>
+		ul{
+			list-style: none;
+			text-transform: capitalize;
+			font-size: 18px;
+			font-family: cursive;
+		}
+	</style>
+</head>
+<body>
+	
+
+	<div class="container">
+		<div id="root">
+			<!-- Paid payments -->
+			<div class="payments">
+				<h1>All Payments</h1><hr>
+				<ul>
+					<li v-for="(payment, i) in payments">
+						{{ i+1 }}. {{ payment.name }} = {{ payment.amount }}
+					</li>
+				</ul>
+			</div>
+			<!-- Unpaid payments -->
+			<div class="unpaid-payments">
+				<h1>Unpaid Payments</h1><hr>
+				<ul>
+					<li v-for="(payment, i) in unpaidPayments">
+						{{ i+1 }}. {{ payment.name }} = {{ payment.amount }}
+					</li>
+				</ul>
+			</div>
+			<!-- Sum of payments -->
+			<div class="sum">
+				<h1>Total Amount: {{ totalAmounts }}</h1>
+			</div>
+		</div>
+	</div>
+
+
+	<script src="vue.js"></script>
+	<script>
+		var app = new Vue({
+			el: '#root',
+			data: {
+				payments: [
+					{ name: 'houserent', amount: 6000, paid: true },
+					{ name: 'gas', amount: 800, paid: false },
+					{ name: 'electricity', amount: 400, paid: true },
+					{ name: 'water', amount: 600, paid: false },
+					{ name: 'net', amount: 500, paid: true },
+				],
+			},
+			computed: {
+				unpaidPayments(){
+					return this.payments.filter(function(payment){
+						return !payment.paid;
+					});
+				},
+				totalAmounts(){
+					var sum = 0;
+					for (var i=0; i<this.payments.length ; i++) {
+						sum += this.payments[i].amount;
+					}
+					return sum;
+				},
+			},
+		});
+	</script>
+</body>
+</html>
