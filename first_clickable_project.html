@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue Js Practice File</title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<style>
+		ul{
+			list-style: none;
+			text-transform: capitalize;
+			font-size: 18px;
+			font-family: cursive;
+		}
+		.hide{
+			display: none;
+		}
+	</style>
+</head>
+<body class="">
+	
+	<div class="container">
+		<div id="root" class="mt-5">
+			<ul>
+				<li v-on:click="changeText()" class="btn btn-primary" :class="{ 'hide' : title == 'Go Back' }"><i class="fas fa-bars pr-1"></i>{{ title }}</li>
+				<li v-on:click="hideText()" v-if=" title == 'Go Back' " class="btn btn-primary">{{ title }}<i class="fas fa-times pl-1"></i></li>
+				<li>{{ description }}</li>
+				
+			</ul>
+		</div> 
+	</div>
+
+
+	<script src="vue.js"></script>
+	<script>
+		var app = new Vue({
+			el: '#root',
+			data: {
+				title: 'About Me',
+				description: '',
+				text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi sunt, provident eos, odio debitis consequuntur dolor vitae, facere hic et aliquid eligendi. Veniam eum porro soluta, cupiditate doloremque ducimus vero?',
+			},
+			methods: {
+				changeText(){
+					this.description = this.text;
+					this.title = 'Go Back';
+				},
+				hideText(){
+					this.description = '';
+					this.title = 'About Me';
+				}
+			},
+		});
+	</script>
+</body>
+</html>
