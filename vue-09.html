@@ -2,35 +2,27 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Vue Js Tutorial-08</title>
+	<title>Vue Js Tutorial-09</title>
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-	<style>
-		ul{
-			list-style: none;
-			text-transform: capitalize;
-			font-size: 18px;
-			font-family: cursive;
-		}
-	</style>
 </head>
 <body>
 	
 	<div class="container">
 		<div id="root">
-			<h5>{{ upperCaseName }}</h5>
-			<h5>{{ profession | upper }}</h5>
-			<p>{{ profession | lower }}</p>
-			<p>{{ getDate }}-{{ getMonth }}-{{ getYear }}</p>
-			<h3>{{ today | bdFormatDate }}</h3>
+			{{ upperCaseName }}
+			<p>{{ profession | upper }}</p>
+			<p>{{ name | lower }}</p>
+			<h6>{{ bdFormatedDate }}</h6>
 		</div>
 	</div>
+
+
 
 	<script src="vue.js"></script>
 	<script>
 		Vue.filter('lower', function(l){
 			return l.toLowerCase();
 		});
-
 		var app = new Vue({
 			el: '#root',
 			data: {
@@ -42,22 +34,13 @@
 				upperCaseName(){
 					return this.name.toUpperCase();
 				},
-				getDate(){
-					return this.today.getDate();
-				},
-				getMonth(){
-					return (this.today.getMonth()+1);
-				},
-				getYear(){
-					return this.today.getFullYear();
+				bdFormatedDate(){
+					return this.today.getDate() + '-' + (this.today.getMonth()+1) + '-' + this.today.getFullYear();
 				},
 			},
 			filters: {
 				upper(p){
 					return p.toUpperCase();
-				},
-				bdFormatDate(d){
-					return d.getUTCDate() + '-' + (d.getUTCMonth()+1) + '-' + d.getUTCFullYear();
 				},
 			},
 		});
