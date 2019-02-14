@@ -4,43 +4,40 @@
 	<meta charset="UTF-8">
 	<title>Vue Js Tutorial-09</title>
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<style>
+		ul{
+			list-style: none;
+			text-transform: capitalize;
+			font-size: 18px;
+			font-family: cursive;
+		}
+	</style>
 </head>
 <body>
 	
+
 	<div class="container">
 		<div id="root">
-			{{ upperCaseName }}
-			<p>{{ profession | upper }}</p>
-			<p>{{ name | lower }}</p>
-			<h6>{{ bdFormatedDate }}</h6>
+			<span v-bind:title="message">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos sapiente, deserunt sed quae enim eum numquam! Deleniti accusamus ipsam sequi ipsum ratione nobis ad, blanditiis, dolorum explicabo dignissimos alias sed.</span>
+			<input class="form-control my-2" type="text" v-model="name">
+			<h1>{{ name }}</h1>
+			<button v-on:click="reverseMessage" class="btn btn-info">Reverse</button>
 		</div>
 	</div>
 
 
-
 	<script src="vue.js"></script>
 	<script>
-		Vue.filter('lower', function(l){
-			return l.toLowerCase();
-		});
+
 		var app = new Vue({
 			el: '#root',
 			data: {
+				message: 'Changing data ' + new Date().toLocaleString(),
 				name: 'Plabon Costa',
-				profession: 'Laravel Developer',
-				today: new Date(),
 			},
-			computed: {
-				upperCaseName(){
-					return this.name.toUpperCase();
-				},
-				bdFormatedDate(){
-					return this.today.getDate() + '-' + (this.today.getMonth()+1) + '-' + this.today.getFullYear();
-				},
-			},
-			filters: {
-				upper(p){
-					return p.toUpperCase();
+			methods: {
+				reverseMessage(){
+					this.name = this.name.split('').reverse().join(' ');
 				},
 			},
 		});
