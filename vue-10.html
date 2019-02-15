@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue Js Tutorial-10</title>
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<style>
+		.close-button{
+			float: right;
+		}
+	</style>
+</head>
+<body>
+
+	<div class="container">
+		<div id="root">
+			<panel title="Something" content="Something ...">
+				<label for="name">Enter Your Name</label><br>
+				<input type="text" id="name" name="name" class="d-block">
+				<button type="submit" class="btn btn-info mt-2">Submit</button>
+			</panel>
+			<panel title="My Profession" content="Laravel Web Application Developer.."></panel>
+		</div>
+	</div>
+
+
+	<script src="vue.js"></script>
+	<script>
+		Vue.component('panel', {
+			template: `
+				<div class="card my-5" v-if="show">
+					<div class="card-header bg-primary">
+						<h2>{{ title }}<button class="btn btn-danger close-button" v-on:click="show = false">x</button></h2>
+						
+					</div>
+					<div class="card-content p-3">
+						{{ content }} <br>
+						<slot></slot>
+					</div>
+				</div>
+			`,
+			props: ['title', 'content'],
+			data: function(){
+				return {
+					show: true,
+				}
+			},
+		});
+
+		var app = new Vue({
+			el: '#root',
+			data: {
+
+			},
+		});
+	</script>
+</body>
+</html>

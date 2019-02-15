@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue Js Tutorial-11</title>
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<style>
+		.close-button{
+			float: right;
+		}
+		img{
+			width: 220px;
+			height: 160px;
+		}
+		.card-image{
+			padding-right: 0px !important;
+		}
+		.card-paragraph{
+			padding-left: 0px !important;
+		}
+	</style>
+</head>
+<body>
+
+	<div class="container">
+		<div id="root">
+			<panel title="My profession" content="Laravel Web Application Developer...">
+				<label for="name">Enter Your Name</label><br>
+				<input type="text" id="name" name="name" class="d-block">
+				<button type="submit" class="btn btn-info mt-2">Submit</button>
+			</panel>
+			<panel title="Something" content="Write your content...">
+				<div class="row">
+					<div class="col-md-3 card-image">
+						<img src="assets/images/2.jpg" alt="">
+					</div>
+					<div class="col-md-9 card-paragraph">
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente, vel amet? Et ab ea ex voluptas aperiam qui similique debitis aliquid, explicabo repudiandae molestias, ipsum reiciendis ipsam ullam eveniet labore!</p>
+					</div>
+				</div>
+			</panel>
+		</div>
+	</div>
+	
+
+	<script src="vue.js"></script>
+	<script>
+		Vue.component('panel', {
+			template: `
+				<div class="card my-5" v-if="show">
+					<div class="card-header">
+						<h2>{{ title }}<button class="btn btn-info close-button" @click="show = false">x</button></h2>
+					</div>
+					<div class="card-body p-3">
+						<slot></slot>
+					</div>
+				</div>
+			`,
+			props: ['title', 'content'],
+			data: function(){
+				return {
+					show: true,
+				}
+			},
+		});
+
+		var app = new Vue({
+			el: '#root',
+			data: {
+
+			},
+		});
+	</script>
+</body>
+</html>
