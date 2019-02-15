@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Vue Js Tutorial-11</title>
+	<title>Vue Js Tutorial-12</title>
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
 	<style>
 		body{
@@ -51,12 +51,13 @@
 </head>
 <body>
 
+
 	<div class="container">
 		<div id="root">
 			<button class="btn btn-primary mt-5" @click="showLogin = true">Login</button>
-			<mymodal v-if="showLogin" @onsave="showLogin = fasle" @oncancel="showLogin = false">
+			<mymodal v-if="showLogin" @onsave="showLogin = false" @oncancel="showLogin = false">
 				<template slot="header">
-					This is my Modal header
+					My Personal Information
 				</template>
 				<template slot="body">
 					<div class="form-group">
@@ -68,7 +69,6 @@
 		</div>
 	</div>
 	
-
 
 	<script src="vue.js"></script>
 	<script>
@@ -83,19 +83,14 @@
 							<slot name="body"></slot>
 						</div>
 						<div class="mymodalFooter">
-							<button @click="$emit('onsave')" class="btn btn-info">Save</button>
-							<button v-on:click="$emit('oncancel')" class="btn btn-danger">Cancel</button>
+							<button v-on:click="$emit('onsave')" class="btn btn-info">Save</button>
+							<button @click="$emit('oncancel')" class="btn btn-danger">Cancel</button>
 						</div>
 					</div>
 				</div>
 			`,
-			data: function(){
-				return {
-					show: true,
-				}
-			},
 		});
-
+		
 		var app = new Vue({
 			el: '#root',
 			data: {
