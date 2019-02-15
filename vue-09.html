@@ -5,7 +5,7 @@
 	<title>Vue Js Tutorial-09</title>
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
 	<style>
-		ul{
+		li{
 			list-style: none;
 			text-transform: capitalize;
 			font-size: 18px;
@@ -22,18 +22,31 @@
 			<input class="form-control my-2" type="text" v-model="name">
 			<h1>{{ name }}</h1>
 			<button v-on:click="reverseMessage" class="btn btn-info">Reverse</button>
+			<br><br>
+			<todo-item v-for="item in groceryList" v-bind:todo="item" v-bind:key="item.id"></todo-item>
 		</div>
 	</div>
 
 
 	<script src="vue.js"></script>
 	<script>
+		Vue.component('todo-item', {
+			template: `
+					<li>{{ todo.text }}</li>
+			`,
+			props: ['todo'],
+		});
 
 		var app = new Vue({
 			el: '#root',
 			data: {
 				message: 'Changing data ' + new Date().toLocaleString(),
 				name: 'Plabon Costa',
+				groceryList: [
+					{ id: 0, text: 'vegetables' },
+					{ id: 1, text: 'chicken' },
+					{ id: 2, text: 'dal' },
+				],
 			},
 			methods: {
 				reverseMessage(){

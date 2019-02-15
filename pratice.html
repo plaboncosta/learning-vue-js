@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue Js Practice</title>
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<style>
+		li{
+			list-style: none;
+			text-transform: capitalize;
+			font-size: 18px;
+			font-family: cursive;
+		}
+	</style>
+</head>
+<body>
+	
+	<div class="container">
+		<div id="root">
+			<div class="form-group">
+				<label for="name">Enter your Name..</label>
+				<input type="text" v-model="name" name="name" id="name" class="form-control">
+			</div>
+			<p :title="message">Hello everyone! My name is: {{ name }}</p>
+			<button class="btn btn-info" @click="reverseMessage">Reverse</button>
+			<todo-item v-for="(payment, i) in payments" :todo="payment" :key="i"></todo-item>
+		</div>
+	</div>
+
+	<script src="vue.js"></script>
+	<script>
+		Vue.component('todo-item', {
+			template: `
+				<li>{{ todo.name }}</li>
+			`,
+			props: ['todo'],
+		});
+
+		var payments = [
+			{ name: 'houserent', amount: 3500 },
+			{ name: 'gas', amount: 600 },
+			{ name: 'wifi', amount: 500 },
+			{ name: 'electricity', amount: 300 },
+		];
+		var app = new Vue({
+			el: '#root',
+			data: {
+				name: 'Plabon Costa',
+				message: 'Hello ' + new Date().toLocaleString(),
+				payments,
+			},
+			methods: {
+				reverseMessage(){
+					this.name = this.name.split('').reverse().join('');
+				},
+			},
+		});
+	</script>
+</body>
+</html>
