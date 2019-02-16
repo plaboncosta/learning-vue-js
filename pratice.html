@@ -2,58 +2,130 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Vue Js Practice</title>
+	<title>Vue Js Tutorial-12</title>
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
 	<style>
-		li{
+		/*===============Tab===============*/
+		.tab{
+			border: 1px solid #4C4C4C;
+			width: 960px;
+			min-height: 111px;
+			background: #FFFFFF;
+			margin: 44px auto;
+		}
+
+		.tab ul{
+			margin: 0;
 			list-style: none;
-			text-transform: capitalize;
-			font-size: 18px;
-			font-family: cursive;
+			background: #B5B5B5;
+		}
+
+		.tab li{
+			display: inline-block;
+			cursor: pointer;
+			padding: 9px;
+			margin-top: 9px;
+		}
+
+		.tab li.active{
+			background: #FFFFFF;
+		}
+
+		.details{
+			padding: 44px;
 		}
 	</style>
 </head>
 <body>
-	
+
+
 	<div class="container">
 		<div id="root">
-			<div class="form-group">
-				<label for="name">Enter your Name..</label>
-				<input type="text" v-model="name" name="name" id="name" class="form-control">
-			</div>
-			<p :title="message">Hello everyone! My name is: {{ name }}</p>
-			<button class="btn btn-info" @click="reverseMessage">Reverse</button>
-			<todo-item v-for="(payment, i) in payments" :todo="payment" :key="i"></todo-item>
+			<tabs>
+				<tab name="Tab1" selected="true">
+					This is Tab1....
+				</tab>
+				<tab name="Tab2">
+					This is Tab2....
+				</tab>
+				<tab name="Tab3">
+					This is Tab3....
+				</tab>
+				<tab name="My Profession">
+					<h3>Laravel Web Application Developer</h3>
+				</tab>
+			</tabs>
 		</div>
 	</div>
+	
 
 	<script src="vue.js"></script>
 	<script>
-		Vue.component('todo-item', {
-			template: `
-				<li>{{ todo.name }}</li>
-			`,
-			props: ['todo'],
-		});
+		var Event = new Vue();
 
-		var payments = [
-			{ name: 'houserent', amount: 3500 },
-			{ name: 'gas', amount: 600 },
-			{ name: 'wifi', amount: 500 },
-			{ name: 'electricity', amount: 300 },
-		];
-		var app = new Vue({
-			el: '#root',
-			data: {
-				name: 'Plabon Costa',
-				message: 'Hello ' + new Date().toLocaleString(),
-				payments,
+		Vue.component('tabs', {
+			template: `
+				<div class="tab">
+					<ul>
+						<li v-for="tab in tabs" :class="{ 'active' : tab.selectedNow }" @click="makeEvent(tab.name)">{{ tab.name }}</li>
+					</ul>
+					<div class="details">
+						<slot></slot>
+					</div>
+				</div>
+			`,
+
+			data: function(){
+				return {
+					tabs: []
+				}
 			},
+
+			created: function(){
+				this.tabs = this.$children;
+			},
+
 			methods: {
-				reverseMessage(){
-					this.name = this.name.split('').reverse().join('');
+				makeEvent(s){
+					Event.$emit('tabchange', s);
 				},
 			},
+		});
+
+
+		Vue.component('tab', {
+			template: `
+				<div v-if="selectedNow">
+					<slot></slot>
+				</div>
+			`,
+
+			props: ['name', 'selected'],
+
+			data: function(){
+				return {
+					selectedNow: false,
+				}
+			},
+
+			created: function(){
+				var currentTab = this;
+				currentTab.selectedNow = currentTab.selected;
+
+				Event.$on('tabchange', function(s){
+					if(s == currentTab.name){
+						currentTab.selectedNow = true;
+					}else{
+						currentTab.selectedNow = false;
+					}
+				});
+			},
+		});
+
+
+		var app = new Vue({
+			el: '#root',
+			data: {},
 		});
 	</script>
 </body>
