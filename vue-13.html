@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue Js Tutorial-13</title>
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<style>
+		.content{
+			width: 350px;
+		    min-height: 200px;
+		    margin: 30px auto;
+		    background-color: #effaab;
+		    padding: 30px;
+		}
+		.fade-enter-active, .fade-leave-active{
+			/*transition: opacity 1s;*/
+			/*transition: margin-top 1s;*/
+			transition: margin-left 0.5s;
+		}
+		.fade-enter, .fade-leave-to{
+			/*opacity: 0;*/
+			/*margin-top: -555px;*/
+			margin-left: -242px;
+		}
+		ul{
+			list-style: none;
+			text-transform: capitalize;
+			font-size: 18px;
+			font-family: cursive;
+		}
+	</style>
+</head>
+<body>
+
+
+	<div class="container">
+		<div id="root">
+			<!-- <button style="box-shadow: none;" class="btn btn-info my-5" @click="show = !show">Toggle</button>
+			<transition name="fade">
+				<div class="content" v-if="show">
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In ad iste tempore fugit repellendus quasi esse minima et saepe, magni obcaecati omnis ut rem, necessitatibus dignissimos harum a ipsa! Quia!</p>
+				</div>
+			</transition> -->
+			<input type="text" v-model="newSkill">
+			<button style="box-shadow: none;" class="btn btn-info my-5" @click="addNewSkill">Add Skill</button>
+			<ul>
+				<transition-group name="fade">
+					<li v-for="(skill, i) in skills" v-bind:key="i+1">
+						{{ i+1 }}. {{ skill }} <button style="box-shadow: none;" class="btn btn-danger btn-sm" @click="removeSkill(i)">x</button>
+					</li>
+				</transition-group>
+			</ul>
+		</div>
+	</div>
+
+	
+
+	<script src="vue.js"></script>
+	<script>
+		var app = new Vue({
+			el: '#root',
+			data: {
+				show: false,
+				newSkill: '',
+				skills : ['html', 'css', 'js', 'php'],
+			},
+
+			methods: {
+				addNewSkill(){
+					this.skills.push(this.newSkill);
+					this.newSkill = '';
+				},
+				removeSkill(i){
+					this.skills.splice(i, 1);
+				},
+			},
+		});
+	</script>
+</body>
+</html>

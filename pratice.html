@@ -43,20 +43,18 @@
 		<div id="root">
 			<tabs>
 				<tab name="Tab1" selected="true">
-					This is Tab1....
+					This is Tab1..
 				</tab>
 				<tab name="Tab2">
-					This is Tab2....
+					This is Tab2..
 				</tab>
 				<tab name="Tab3">
-					This is Tab3....
-				</tab>
-				<tab name="My Profession">
-					<h3>Laravel Web Application Developer</h3>
+					This is Tab3..
 				</tab>
 			</tabs>
 		</div>
 	</div>
+
 	
 
 	<script src="vue.js"></script>
@@ -67,7 +65,7 @@
 			template: `
 				<div class="tab">
 					<ul>
-						<li v-for="tab in tabs" :class="{ 'active' : tab.selectedNow }" @click="makeEvent(tab.name)">{{ tab.name }}</li>
+						<li @click="makeEvent(tab.name)" :class="{ 'active' : tab.selectedNow }" v-for="(tab, i) in tabs" :key="i">{{ tab.name }}</li>
 					</ul>
 					<div class="details">
 						<slot></slot>
@@ -77,7 +75,7 @@
 
 			data: function(){
 				return {
-					tabs: []
+					tabs: [],
 				}
 			},
 
@@ -90,6 +88,7 @@
 					Event.$emit('tabchange', s);
 				},
 			},
+
 		});
 
 
@@ -111,21 +110,26 @@
 			created: function(){
 				var currentTab = this;
 				currentTab.selectedNow = currentTab.selected;
-
-				Event.$on('tabchange', function(s){
+				Event.$on("tabchange", function(s){
 					if(s == currentTab.name){
 						currentTab.selectedNow = true;
-					}else{
+					}
+					else{
 						currentTab.selectedNow = false;
 					}
 				});
+
 			},
+
+			
 		});
 
 
 		var app = new Vue({
 			el: '#root',
-			data: {},
+			data: {
+
+			},
 		});
 	</script>
 </body>
