@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue Js Tutorial-14</title>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.fade-enter-active, .fade-leave-active {
+		  transition: margin-left 1s;
+		}
+		.fade-enter{
+			margin-left: -1111px;
+		}
+		.fade-leave-to{
+			margin-left: 1111px;
+		}
+		
+	</style>
+</head>
+<body>
+	
+	<div id="root">
+		<ul class="menu">
+			<li><a href="home">Home</a></li>
+			<li><a href="about">About</a></li>
+			<li><a href="contact">Contact</a></li>
+		</ul>
+		<ul class="menu">
+			<li><router-link to="home">Home</router-link></li>
+			<li><router-link to="about">About</router-link></li>
+			<li><router-link to="contact">Contact</router-link></li>
+		</ul>
+		<transition name="fade">
+			<router-view></router-view>
+		</transition>
+	</div>
+
+
+	<script src="vue.js"></script>
+	<script src="vue-router.js"></script>
+	<script>
+		var Home = {
+			template: `
+				<div class="main">
+					<div class="foo">
+						<h1>Home page</h1>
+						<p>This is Home Page....</p>
+					</div>
+				</div>
+			`
+		};
+
+
+		var About = {
+			template: `
+					<div class="main">
+						<div class="foo">
+							<h1>About page</h1>
+							<p>This is About Page....</p>
+						</div>
+					</div>
+			`
+		};
+
+
+		var Contact = {
+			template: `
+				<div class="main">
+					<div class="foo">
+						<h1>Contact page</h1>
+						<p>This is Contact Page....</p>
+					</div>
+				</div>
+			`
+		};
+
+
+		var routes = [
+			{ path: '/home', component: Home  },
+			{ path: '/about', component: About  },
+			{ path: '/contact', component: Contact  },
+		];
+
+		var router = new VueRouter({
+			routes: routes,
+			mode: 'history',
+			base: 'view-js/vue-14/router',
+		});
+
+
+		var app = new Vue({
+			router: router
+		}).$mount('#root');
+	</script>
+</body>
+</html>

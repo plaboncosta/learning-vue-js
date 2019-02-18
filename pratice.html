@@ -5,34 +5,31 @@
 	<title>Vue Js Tutorial-12</title>
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
 	<style>
-		/*===============Tab===============*/
-		.tab{
-			border: 1px solid #4C4C4C;
-			width: 960px;
-			min-height: 111px;
-			background: #FFFFFF;
-			margin: 44px auto;
+		.content{
+			width: 350px;
+		    min-height: 200px;
+		    margin: 30px auto;
+		    background-color: #effaab;
+		    padding: 30px;
 		}
-
-		.tab ul{
-			margin: 0;
+		.fade-enter-active, .fade-leave-active{
+			/*transition: opacity 1s;*/
+			/*transition: margin-top 1s;*/
+			transition: margin-left 1s;
+		}
+		.fade-enter, .fade-leave-to{
+			/*opacity: 0;*/
+			/*margin-top: -555px;*/
+			margin-left: -222px;
+		}
+		button:focus{
+			box-shadow: none !important;
+		}
+		ul{
 			list-style: none;
-			background: #B5B5B5;
-		}
-
-		.tab li{
-			display: inline-block;
-			cursor: pointer;
-			padding: 9px;
-			margin-top: 9px;
-		}
-
-		.tab li.active{
-			background: #FFFFFF;
-		}
-
-		.details{
-			padding: 44px;
+			text-transform: capitalize;
+			font-size: 18px;
+			font-family: cursive;
 		}
 	</style>
 </head>
@@ -41,94 +38,33 @@
 
 	<div class="container">
 		<div id="root">
-			<tabs>
-				<tab name="Tab1" selected="true">
-					This is Tab1..
-				</tab>
-				<tab name="Tab2">
-					This is Tab2..
-				</tab>
-				<tab name="Tab3">
-					This is Tab3..
-				</tab>
-			</tabs>
+			<button @click="getPosts()">Call Api</button>
+			<div v-for="post in posts">
+				<h2>{{ post.title }}({{ post.id }})</h2>
+				<p>{{ post.body }}</p>
+			</div>
 		</div>
 	</div>
 
 	
 
 	<script src="vue.js"></script>
+	<script src="axios.js"></script>
 	<script>
-		var Event = new Vue();
-
-		Vue.component('tabs', {
-			template: `
-				<div class="tab">
-					<ul>
-						<li @click="makeEvent(tab.name)" :class="{ 'active' : tab.selectedNow }" v-for="(tab, i) in tabs" :key="i">{{ tab.name }}</li>
-					</ul>
-					<div class="details">
-						<slot></slot>
-					</div>
-				</div>
-			`,
-
-			data: function(){
-				return {
-					tabs: [],
-				}
-			},
-
-			created: function(){
-				this.tabs = this.$children;
-			},
-
-			methods: {
-				makeEvent(s){
-					Event.$emit('tabchange', s);
-				},
-			},
-
-		});
-
-
-		Vue.component('tab', {
-			template: `
-				<div v-if="selectedNow">
-					<slot></slot>
-				</div>
-			`,
-
-			props: ['name', 'selected'],
-
-			data: function(){
-				return {
-					selectedNow: false,
-				}
-			},
-
-			created: function(){
-				var currentTab = this;
-				currentTab.selectedNow = currentTab.selected;
-				Event.$on("tabchange", function(s){
-					if(s == currentTab.name){
-						currentTab.selectedNow = true;
-					}
-					else{
-						currentTab.selectedNow = false;
-					}
-				});
-
-			},
-
-			
-		});
-
-
 		var app = new Vue({
 			el: '#root',
 			data: {
+				posts: [],
+			},
 
+			methods: {
+				getPosts(){
+					var CurrentData = this;
+					axios.get("https://jsonplaceholder.typicode.com/posts")
+					.then(function(res){
+						CurrentData.posts = res.data;
+					});
+				},
 			},
 		});
 	</script>

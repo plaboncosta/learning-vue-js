@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue Js Tutorial-15</title>
+</head>
+<body>
+
+	<div id="root">
+		<button @click="getPosts()">Call Api</button>
+		<div v-for="post in posts">
+			<h2>{{ post.title }}</h2>
+			<p>{{ post.body }}</p>
+		</div>
+	</div>
+	
+
+	<script src="vue.js"></script>
+	<script src="axios.js"></script>
+	<script>
+		var app = new Vue({
+			el: '#root',
+			data: {
+				posts: [],
+			},
+			methods: {
+				getPosts(){
+					var currentPost = this;
+					axios.get("https://jsonplaceholder.typicode.com/posts")
+					// Then is promise
+					.then(function(res){
+						currentPost.posts = res.data;
+					});
+				},
+			},
+		});
+	</script>
+</body>
+</html>

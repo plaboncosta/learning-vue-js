@@ -1,0 +1,30 @@
+.foo{
+	background: #ACE371;
+	text-align: center;
+	width: 960px;
+	margin: 44px auto;
+	min-height: 222px;
+}
+.main{
+	position: absolute;
+	width: 100%;
+}
+ul.menu{
+	list-style: none;
+	width: 960px;
+	margin: auto;
+	background: #1A6AA1;
+	color: #fff;
+}
+ul.menu li{
+	display: inline;
+}
+ul.menu li a{
+	color: #fff;
+	display: inline-block;
+	padding: 5px;
+	text-decoration: none;
+}
+ul.menu li a.router-link-active, ul.menu li a:hover{
+	background: #BE4001;
+}
